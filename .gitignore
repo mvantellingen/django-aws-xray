@@ -1,0 +1,24 @@
+*.egg-info
+*.pyc
+.tox
+.coverage
+.coverage.*
+.eggs
+.cache
+.python-version
+.venv
+.idea/
+
+/build/
+/dist/
+/docs/_build/
+/htmlcov/
+
+/xray_mac
+/cfg.yaml
+
+
+
+# Editors
+.idea/
+.vscode/
