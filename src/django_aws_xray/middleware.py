@@ -5,7 +5,7 @@ import uuid
 
 from django.conf import settings
 
-from django_aws_xray import records, traces, xray
+from django_aws_xray import records, xray
 
 
 class XRayMiddleware:

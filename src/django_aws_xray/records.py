@@ -110,7 +110,6 @@ class HttpRecord:
         }
 
 
-
 @attr.s
 class SqlRecord:
     sanitized_query = attr.ib()
