@@ -1,3 +1,4 @@
+import re
 from setuptools import find_packages, setup
 
 docs_require = [
@@ -17,11 +18,16 @@ tests_require = [
     'flake8-debugger==1.4.0',
 ]
 
+with open('README.rst') as fh:
+    long_description = re.sub(
+        '^.. start-no-pypi.*^.. end-no-pypi', '', fh.read(), flags=re.M | re.S)
+
+
 setup(
     name='django-aws-xray',
     version='0.1.0',
     description="Django AWS X-Ray",
-    long_description=open('README.rst', 'r').read(),
+    long_description=long_description,
     url='https://github.com/mvantellingen/django-aws-xray',
     author="Michael van Tellingen",
     author_email="",
