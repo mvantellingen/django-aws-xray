@@ -19,10 +19,10 @@ tests_require = [
 
 setup(
     name='django-aws-xray',
-    version='0.0.4',
+    version='0.1.0',
     description="Django AWS X-Ray",
     long_description=open('README.rst', 'r').read(),
-    url='https://github.com/mvantellingen/django-xray',
+    url='https://github.com/mvantellingen/django-aws-xray',
     author="Michael van Tellingen",
     author_email="",
     install_requires=[
@@ -48,8 +48,6 @@ setup(
         'Framework :: Django :: 1.11',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
