@@ -1,5 +1,5 @@
-import socket
 import json
+import socket
 import threading
 
 from django.conf import settings

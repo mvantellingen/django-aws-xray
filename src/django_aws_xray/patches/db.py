@@ -1,11 +1,13 @@
 import django
+
+from django_aws_xray.patches.utils import patch_method
+from django_aws_xray.traces import trace_sql
+
 try:
     from django.db.backends import utils as util
 except ImportError:
     from django.db.backends import util
 
-from django_aws_xray.patches.utils import patch_method
-from django_aws_xray.traces import trace_sql
 
 
 def key(db, attr):

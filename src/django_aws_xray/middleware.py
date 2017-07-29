@@ -1,9 +1,10 @@
-import time
-import random
-import uuid
 import logging
+import random
+import time
+import uuid
 
 from django.conf import settings
+
 from django_aws_xray import records, traces, xray
 
 
