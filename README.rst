@@ -40,8 +40,9 @@ Settings
 ========
 
 
-
-| Setting | Name | Default |
-|---------------------------|---------------|---------|
-| `AWS_XRAY_SAMPLING_RATE` | Sampling rate | 100 |
-| `AWS_XRAY_EXCLUDED_PATHS` | Exclude paths | ``[]`` |
+=========================   =============  ==========
+Setting                     Name           Default
+=========================   =============  ==========
+`AWS_XRAY_SAMPLING_RATE`    Sampling rate  100
+`AWS_XRAY_EXCLUDED_PATHS`   Exclude paths  ``[]``  
+=========================   =============  ==========
