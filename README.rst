@@ -21,11 +21,6 @@ to send traces to the `X-Ray daemon`_.
 .. _`X-Ray daemon`: http://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html
 
 
-Status
-======
-
-
-
 Installation
 ============
 
