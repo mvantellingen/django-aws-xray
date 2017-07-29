@@ -45,14 +45,14 @@ Update your Django settings:
 Settings
 ========
 
-=========================   ===================== ==========
-Setting                     Name                  Default
-=========================   ===================== ==========
-`AWS_XRAY_SAMPLING_RATE`    Sampling rate         100
-`AWS_XRAY_EXCLUDED_PATHS`   Exclude paths         `[]`
-`AWS_XRAY_HOST`             IP of X-Ray Daemon    127.0.0.1
-`AWS_XRAY_PORT`             Port of X-Ray Daemon  2000
-=========================   ====================  ==========
+=========================   =====================  ==========
+Setting                     Name                   Default
+=========================   =====================  ==========
+`AWS_XRAY_SAMPLING_RATE`    Sampling rate          100
+`AWS_XRAY_EXCLUDED_PATHS`   Exclude paths          `[]`
+`AWS_XRAY_HOST`             IP of X-Ray Daemon     127.0.0.1
+`AWS_XRAY_PORT`             Port of X-Ray Daemon   2000
+=========================   =====================  ==========
 
 
 Credits
