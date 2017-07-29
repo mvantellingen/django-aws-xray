@@ -11,7 +11,7 @@ retest:
 	py.test -vvv --lf
 
 coverage:
-	py.test --cov=django_xray --cov-report=term-missing --cov-report=html
+	py.test --cov=django_aws_xray --cov-report=term-missing --cov-report=html
 
 docs:
 	$(MAKE) -C docs html
