@@ -1,3 +1,16 @@
+.. start-no-pypi
+
+.. image:: https://travis-ci.org/mvantellingen/django-aws-xray.svg?branch=master
+    :target: https://travis-ci.org/mvantellingen/django-aws-xray
+
+.. image:: http://codecov.io/github/mvantellingen/django-aws-xray/coverage.svg?branch=master
+    :target: http://codecov.io/github/mvantellingen/django-aws-xray?branch=master
+
+.. image:: https://img.shields.io/pypi/v/django-aws-xray.svg
+    :target: https://pypi.python.org/pypi/django-aws-xray/
+    
+.. end-no-pypi
+
 ===============
 django-aws-xray
 ===============
@@ -10,14 +23,7 @@ to send traces to the `X-Ray daemon`_.
 
 Status
 ======
-.. image:: https://travis-ci.org/mvantellingen/django-aws-xray.svg?branch=master
-    :target: https://travis-ci.org/mvantellingen/django-aws-xray
 
-.. image:: http://codecov.io/github/mvantellingen/django-aws-xray/coverage.svg?branch=master
-    :target: http://codecov.io/github/mvantellingen/django-aws-xray?branch=master
-
-.. image:: https://img.shields.io/pypi/v/django-aws-xray.svg
-    :target: https://pypi.python.org/pypi/django-aws-xray/
 
 
 Installation
