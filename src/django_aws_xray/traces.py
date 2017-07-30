@@ -43,4 +43,3 @@ def trace_http(name, method, url):
             yield http_record
     else:
         yield http_record
-

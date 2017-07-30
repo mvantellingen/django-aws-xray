@@ -1,5 +1,4 @@
 import wrapt
-
 from django.core import cache
 from django.core.cache.backends.base import BaseCache
 

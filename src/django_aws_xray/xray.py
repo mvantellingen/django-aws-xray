@@ -1,10 +1,10 @@
+import threading
 import time
 import uuid
-import threading
 from contextlib import contextmanager
+
 from django_aws_xray import records
 from django_aws_xray.connection import Connection
-
 
 tls = threading.local()
 tls.trace_id = None
