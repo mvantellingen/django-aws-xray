@@ -44,6 +44,7 @@ Update your Django settings:
     # Enable various instrumentation monkeypatches
     AWS_XRAY_PATCHES = [
         'django_aws_xray.patches.cache',
+        'django_aws_xray.patches.redis',
         'django_aws_xray.patches.db',
         'django_aws_xray.patches.requests',
         'django_aws_xray.patches.templates',
