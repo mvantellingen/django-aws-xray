@@ -22,7 +22,10 @@ def patched_execute_command(func, instance, args, kwargs):
 
 def patch():
     """ Monkeypatch the requests library to trace http calls. """
-    wrapt.wrap_function_wrapper(
-        'redis.client', 'Redis.execute_command', patched_execute_command)
-    wrapt.wrap_function_wrapper(
-        'redis.client', 'StrictRedis.execute_command', patched_execute_command)
+    try:
+        wrapt.wrap_function_wrapper(
+            'redis.client', 'Redis.execute_command', patched_execute_command)
+        wrapt.wrap_function_wrapper(
+            'redis.client', 'StrictRedis.execute_command', patched_execute_command)
+    except ModuleNotFoundError:
+        pass
