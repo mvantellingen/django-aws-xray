@@ -13,6 +13,7 @@ docs_require = [
 ]
 
 tests_require = [
+    'bumpversion==0.5.3',
     'coverage==.4.2',
     'pytest==3.0.5',
     'pytest-cov==2.5.1',
