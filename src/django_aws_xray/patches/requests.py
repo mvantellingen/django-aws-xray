@@ -1,6 +1,6 @@
 import wrapt
 
-from django_aws_xray.traces import time_http
+from django_aws_xray.traces import trace_http
 
 
 def patched_request(func, instance, args, kwargs):
@@ -8,7 +8,7 @@ def patched_request(func, instance, args, kwargs):
     url = kwargs.get('url') or args[1]
     name = 'requests.request'
 
-    with time_http(name, method, url) as trace:
+    with trace_http(name, method, url) as trace:
         response = func(*args, **kwargs)
         trace.response_status_code = response.status_code
         return response

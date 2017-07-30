@@ -46,6 +46,7 @@ Update your Django settings:
         'django_aws_xray.patches.cache',
         'django_aws_xray.patches.db',
         'django_aws_xray.patches.requests',
+        'django_aws_xray.patches.templates',
     ]
 
 

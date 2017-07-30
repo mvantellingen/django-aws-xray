@@ -31,7 +31,7 @@ def trace_sql(name, db, query):
 
 
 @contextmanager
-def time_http(name, method, url):
+def trace_http(name, method, url):
     http_record = records.HttpRecord(
         request_method=method,
         request_url=url)
