@@ -11,7 +11,13 @@ from django.conf import settings
 
 def pytest_configure():
     settings.configure(
-        MIDDLEWARE_CLASSES=[],
+        MIDDLEWARE=[
+            'django_aws_xray.middleware.XRayMiddleware'
+        ],
+        INSTALLED_APPS=[
+            'django_aws_xray',
+            'tests.app',
+        ],
         CACHES={
             'default': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -24,6 +30,7 @@ def pytest_configure():
                 'NAME': 'db.sqlite',
             },
         },
+        ROOT_URLCONF='tests.app.urls',
         AWS_XRAY_HOST='127.0.0.1',
         AWS_XRAY_PORT=2399,
     )

@@ -1,7 +1,6 @@
 import logging
 import random
 import time
-import uuid
 
 from django.conf import settings
 
@@ -16,46 +15,44 @@ class XRayMiddleware:
         self.logger = logging.getLogger(__name__)
 
     def __call__(self, request):
-        enable_tracing = random.randint(0, 100) <= self.sampling_rate
-        for path in self.exclude_paths:
-            if path.startswith(request.path):
-                enable_tracing = False
+        trace = self._create_trace(request)
 
-        self.logger.info("Tracing enabled: %s", enable_tracing)
+        # Set the thread local trace object
+        xray.set_current_trace(trace)
 
-        if enable_tracing:
-            trace = self._create_new_segment(request)
-            xray.set_current_trace(trace)
-
-        try:
+        with trace.track('django.request') as record:
             response = self.get_response(request)
-            if enable_tracing:
-                trace.http.response_status_code = response.status_code
-            return response
-        finally:
-            if enable_tracing:
-                trace.end_time = time.time()
-                xray.connection.send(trace)
-                xray.set_current_trace(None)
+            record.http = self._create_http_record(request, response)
 
-    def _create_new_segment(self, request):
-        trace_id = request.META.get('HTTP_X_AMZN_TRACE_ID')
-        http_data = None
-        if trace_id:
-            prefix, trace_id = trace_id.split('=', 1)
+        # Send out the traces
+        trace.send()
+
+        # Set the HTTP header
+        response['X-Amzn-Trace-Id'] = trace.http_header
+
+        # Cleanup the thread local trace object
+        xray.set_current_trace(None)
+
+        return response
+
+    def _create_trace(self, request):
+        # Decide if we need to sample this request
+        sampled = random.randint(0, 100) <= self.sampling_rate
+        for path in self.exclude_paths:
+            if request.path.startswith(path):
+                sampled = False
+
+        trace_header = request.META.get('HTTP_X_AMZN_TRACE_ID')
+        if trace_header:
+            trace = xray.Trace.from_http_header(trace_header, sampled)
         else:
-            trace_id = '1-%08x-%s' % (int(time.time()), uuid.uuid4().hex[:24])
+            trace = xray.Trace.generate_new(sampled)
 
-        http_data = records.HttpRecord(
+        return trace
+
+    def _create_http_record(self, request, response):
+        return records.HttpRecord(
             request_method=request.method,
             request_url=request.get_full_path(),
-            request_user_agent=request.META.get('User-Agent'))
-
-        segment = records.SegmentRecord(
-            name='django.request',
-            start_time=time.time(),
-            end_time=None,
-            trace_id=trace_id,
-            http=http_data)
-
-        return segment
+            request_user_agent=request.META.get('User-Agent'),
+            response_status_code=response.status_code)

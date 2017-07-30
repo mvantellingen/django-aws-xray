@@ -5,7 +5,7 @@ try:
 except ImportError:
     from django.utils.importlib import import_module
 
-patches = getattr(settings, 'DJANGO_XRAY_PATCHES', [])
+patches = getattr(settings, 'AWS_XRAY_PATCHES', [])
 
 print(patches)
 

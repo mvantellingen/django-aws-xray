@@ -1,6 +1,13 @@
 import re
 from setuptools import find_packages, setup
 
+install_requires = [
+    'attrs>=17.2.0',
+    'Django>=1.8',
+    'six>=1.1',
+    'wrapt>=1.10.10,<2',
+]
+
 docs_require = [
     'sphinx>=1.4.0',
 ]
@@ -31,11 +38,7 @@ setup(
     url='https://github.com/mvantellingen/django-aws-xray',
     author="Michael van Tellingen",
     author_email="",
-    install_requires=[
-        'attrs>=17.2.0',
-        'Django>=1.8',
-        'six>=1.1',
-    ],
+    install_requires=install_requires,
     tests_require=tests_require,
     extras_require={
         'docs': docs_require,

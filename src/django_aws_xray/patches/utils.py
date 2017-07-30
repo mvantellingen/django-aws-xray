@@ -1,6 +1,6 @@
 from functools import partial, wraps
 
-from django_aws_xray.traces import trace
+from django_aws_xray import traces
 
 
 def patch_method(target, name, external_decorator=None):
@@ -19,7 +19,7 @@ def patch_method(target, name, external_decorator=None):
 
 
 def wrapped(method, key, *args, **kw):
-    with trace.timer(key):
+    with traces.trace(key):
         return method(*args, **kw)
 
 

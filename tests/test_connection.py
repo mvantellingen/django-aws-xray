@@ -1,5 +1,5 @@
 import time
-from django_aws_xray import xray, records
+from django_aws_xray import connection, records
 
 
 def test_send(xray_daemon):
@@ -10,7 +10,8 @@ def test_send(xray_daemon):
         end_time=1501314262.901,
         trace_id='my-id')
 
-    xray.connection.send(record)
+    conn = connection.Connection()
+    conn.send(record)
 
     messages = xray_daemon.get_new_messages()
     assert len(messages) == 1

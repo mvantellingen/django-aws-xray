@@ -2,16 +2,16 @@ import uuid
 
 import attr
 
-from django_aws_xray.xray import connection
+from django_aws_xray.connection import Connection
 
 
 @attr.s
 class SegmentRecord:
     id = attr.ib(init=False, default=attr.Factory(lambda: uuid.uuid4().hex[16:]))
     name = attr.ib()
-    start_time = attr.ib()
-    end_time = attr.ib()
-    trace_id = attr.ib()
+    trace_id = attr.ib(default=None)
+    start_time = attr.ib(default=None)
+    end_time = attr.ib(default=None)
     http = attr.ib(default=None)
     subsegments = attr.ib(default=attr.Factory(list))
 
@@ -27,34 +27,23 @@ class SegmentRecord:
         if self.http:
             data['http'] = self.http.serialize()
 
-        # if self.subsegments:
-        #     data['subsegments'] = [
-        #         subsegment.serialize(skip_parent_id=True)
-        #         for subsegment in self.subsegments
-        #     ]
-
         return data
-
-    def add_subsegment(self, subsegment):
-        subsegment.trace_id = self.trace_id
-        subsegment.parent_id = self.id
-        connection.send(subsegment)
 
 
 @attr.s
 class SubSegmentRecord:
     id = attr.ib(init=False, default=attr.Factory(lambda: uuid.uuid4().hex[16:]))
     name = attr.ib()
-    start_time = attr.ib()
-    end_time = attr.ib()
-    trace_id = attr.ib(default=None, init=False)
-    parent_id = attr.ib(default=None, init=False)
+    start_time = attr.ib(default=None)
+    end_time = attr.ib(default=None)
+    trace_id = attr.ib(default=None)
+    parent_id = attr.ib(default=None)
     namespace = attr.ib(default='remote')
     subsegments = attr.ib(default=attr.Factory(list))
     http = attr.ib(default=None)
     sql = attr.ib(default=None)
 
-    def serialize(self, skip_parent_id=False):
+    def serialize(self):
         data = {
             'name': self.name,
             'id': self.id,
@@ -72,21 +61,7 @@ class SubSegmentRecord:
         if self.sql:
             data['sql'] = self.sql.serialize()
 
-        if skip_parent_id:
-            data['parent_id'] = None
-
-        # if self.subsegments:
-        #     data['subsegments'] = [
-        #         subsegment.serialize(skip_parent_id=True)
-        #         for subsegment in self.subsegments
-        #     ]
-
         return data
-
-    def add_subsegment(self, subsegment):
-        subsegment.trace_id = self.trace_id
-        subsegment.parent_id = self.id
-        connection.send(subsegment)
 
 
 @attr.s

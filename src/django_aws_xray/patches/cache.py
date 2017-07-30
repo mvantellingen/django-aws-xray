@@ -1,3 +1,5 @@
+import wrapt
+
 from django.core import cache
 from django.core.cache.backends.base import BaseCache
 
@@ -16,6 +18,7 @@ class XRayTracker(BaseCache):
     def __getattribute__(self, attr):
         if attr == 'cache':
             return BaseCache.__getattribute__(self, attr)
+
         return wrap(getattr(self.cache, attr), key(self.cache, attr))
 
 

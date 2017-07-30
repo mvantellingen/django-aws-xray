@@ -8,15 +8,15 @@
 
 .. image:: https://img.shields.io/pypi/v/django-aws-xray.svg
     :target: https://pypi.python.org/pypi/django-aws-xray/
-    
+
 .. end-no-pypi
 
 ===============
 django-aws-xray
 ===============
 
-Leverage AWS X-Ray for your Django projects! This Django app instruments your code 
-to send traces to the `X-Ray daemon`_. 
+Leverage AWS X-Ray for your Django projects! This Django app instruments your code
+to send traces to the `X-Ray daemon`_.
 
 .. _`X-Ray daemon`: http://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html
 
@@ -41,6 +41,13 @@ Update your Django settings:
 
     MIDDLEWARE.insert(0, 'django_aws_xray.middleware.XRayMiddleware')
 
+    # Enable various instrumentation monkeypatches
+    AWS_XRAY_PATCHES = [
+        'django_aws_xray.patches.cache',
+        'django_aws_xray.patches.db',
+        'django_aws_xray.patches.requests',
+    ]
+
 
 Settings
 ========
@@ -52,6 +59,7 @@ Setting                     Name                   Default
 `AWS_XRAY_EXCLUDED_PATHS`   Exclude paths          `[]`
 `AWS_XRAY_HOST`             IP of X-Ray Daemon     127.0.0.1
 `AWS_XRAY_PORT`             Port of X-Ray Daemon   2000
+`AWS_XRAY_PATCHES`          Patches                ``[]``
 =========================   =====================  ==========
 
 
