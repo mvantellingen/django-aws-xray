@@ -14,9 +14,8 @@ def patched_execute_command(func, instance, args, kwargs):
     if command in ('GET', 'SET', 'DELETE', 'INCR', 'DECR'):
         key = str(args[1])
 
-    with trace_http('redis', command, key) as trace:
+    with trace_http('redis', command, key):
         response = func(*args, **kwargs)
-        trace.response_status_code = response.status_code
         return response
 
 
