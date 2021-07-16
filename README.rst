@@ -15,6 +15,10 @@
 django-aws-xray
 ===============
 
+**N.B.**: AWS have released a beta version of their official X-Ray Python SDK which supports
+Django, you might want to consider using that:
+https://aws.amazon.com/about-aws/whats-new/2017/08/aws-x-ray-sdk-for-python-beta/
+
 Leverage AWS X-Ray for your Django projects! This Django app instruments your code
 to send traces to the `X-Ray daemon`_.
 
